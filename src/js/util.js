@@ -43,9 +43,9 @@ define('util', ['conf', 'underscore', 'knockout','consts','asset'], function (co
 
 
         if (r.raw_tx_type == 'burns'){
-          r.desc = "XCP Proof-of-Burn";
-          r.amount = new Asset(msg['burned'], 'BTC');
-          r.amount2 = new Asset(msg['earned'], 'XCP');
+          r.desc = "XUP Proof-of-Burn";
+          r.amount = new Asset(msg['burned'], 'UNO');
+          r.amount2 = new Asset(msg['earned'], 'XUP');
         }
         else if (r.raw_tx_type == 'sends') {
           r.desc = "Send";
@@ -65,9 +65,9 @@ define('util', ['conf', 'underscore', 'knockout','consts','asset'], function (co
           r.amount2 = new Asset(msg['forward_quantity'],msg['forward_asset'],msg['_forward_asset_divisible']);
 
         }
-        else if (r.raw_tx_type == 'btcpays'){
+        else if (r.raw_tx_type == 'unopays'){
           r.desc = "Payment";
-          r.amount = new Asset(msg['btc_amount'],'BTC');
+          r.amount = new Asset(msg['btc_amount'],'UNO');
         }
         else if (r.raw_tx_type == 'issuances'){
           if (msg['transfer']){
@@ -93,16 +93,16 @@ define('util', ['conf', 'underscore', 'knockout','consts','asset'], function (co
           var odds = my.reduce(msg['wager_quantity'], msg['counterwager_quantity']);
           r.msg = "Odds: " + odds[0]+'/'+odds[1];
           r.src = msg['feed_address'];
-          r.amount = new Asset(msg['wager_quantity'], 'XCP');
-          r.amount2 = new Asset(msg['counterwager_quantity'], 'XCP');
+          r.amount = new Asset(msg['wager_quantity'], 'XUP');
+          r.amount2 = new Asset(msg['counterwager_quantity'], 'XUP');
 
         }
         else if (r.raw_tx_type == 'bet_matches'){
           r.desc = "Bet Match";
           r.src = msg['feed_address'];
           r.dest = msg['tx0_address'];
-          r.amount = new Asset(msg['forward_quantity'],'XCP');
-          r.amount2 = new Asset(msg['backward_quantity'],'XCP');
+          r.amount = new Asset(msg['forward_quantity'],'XUP');
+          r.amount2 = new Asset(msg['backward_quantity'],'XUP');
         }
         else if (r.raw_tx_type == 'dividends'){
           r.desc = "Dividend Paid";
@@ -148,13 +148,13 @@ define('util', ['conf', 'underscore', 'knockout','consts','asset'], function (co
         }
         else if (r.raw_tx_type == 'rps'){
           r.desc = "Rock/Paper/Scissors Bet";
-          r.amount = new Asset(msg['quantity'],'XCP');
+          r.amount = new Asset(msg['quantity'],'XUP');
         }
         else if (r.raw_tx_type == 'rps_matches'){
           r.desc = "Rock/Paper/Scissors Bet Matched";
           r.src = msg['tx0_address'];
           r.dest = msg['tx1_address'];
-          r.amount = new Asset(msg['wager'],'XCP');
+          r.amount = new Asset(msg['wager'],'XUP');
         }
         else if (r.raw_tx_type == 'rpsresolves'){
           r.desc = "Rock/Paper/Scissors Bet Resolved";
